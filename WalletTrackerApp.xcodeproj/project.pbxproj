@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		892E6563292F592E00969BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6562292F592E00969BDC /* AppDelegate.swift */; };
 		892E6565292F592E00969BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6564292F592E00969BDC /* SceneDelegate.swift */; };
-		892E6567292F592E00969BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6566292F592E00969BDC /* ViewController.swift */; };
-		892E656A292F592E00969BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E6568292F592E00969BDC /* Main.storyboard */; };
+		892E6567292F592E00969BDC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6566292F592E00969BDC /* HomeViewController.swift */; };
 		892E656C292F592F00969BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 892E656B292F592F00969BDC /* Assets.xcassets */; };
 		892E656F292F592F00969BDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892E656D292F592F00969BDC /* LaunchScreen.storyboard */; };
+		89EE21E0292F62EF00218E17 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21DF292F62EF00218E17 /* HomeViewModel.swift */; };
+		89EE21E329309EC300218E17 /* AddConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21E229309EC300218E17 /* AddConsumptionViewController.swift */; };
+		89EE21E629309EE200218E17 /* AddConsumptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21E529309EE200218E17 /* AddConsumptionViewModel.swift */; };
+		89EE21E82930A03000218E17 /* Extension + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21E72930A03000218E17 /* Extension + UITextField.swift */; };
+		89EE21EB2930A18D00218E17 /* Extension + UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21EA2930A18D00218E17 /* Extension + UIStackView.swift */; };
+		89EE21ED2930AA8D00218E17 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21EC2930AA8D00218E17 /* Extension + UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		892E655F292F592E00969BDC /* WalletTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		892E6562292F592E00969BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		892E6564292F592E00969BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		892E6566292F592E00969BDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		892E6569292F592E00969BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		892E6566292F592E00969BDC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		892E656B292F592F00969BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		892E656E292F592F00969BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		892E6570292F592F00969BDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89EE21DF292F62EF00218E17 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		89EE21E229309EC300218E17 /* AddConsumptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumptionViewController.swift; sourceTree = "<group>"; };
+		89EE21E529309EE200218E17 /* AddConsumptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumptionViewModel.swift; sourceTree = "<group>"; };
+		89EE21E72930A03000218E17 /* Extension + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextField.swift"; sourceTree = "<group>"; };
+		89EE21EA2930A18D00218E17 /* Extension + UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIStackView.swift"; sourceTree = "<group>"; };
+		89EE21EC2930AA8D00218E17 /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,68 @@
 		892E6561292F592E00969BDC /* WalletTrackerApp */ = {
 			isa = PBXGroup;
 			children = (
-				892E6562292F592E00969BDC /* AppDelegate.swift */,
-				892E6564292F592E00969BDC /* SceneDelegate.swift */,
-				892E6566292F592E00969BDC /* ViewController.swift */,
-				892E6568292F592E00969BDC /* Main.storyboard */,
-				892E656B292F592F00969BDC /* Assets.xcassets */,
-				892E656D292F592F00969BDC /* LaunchScreen.storyboard */,
-				892E6570292F592F00969BDC /* Info.plist */,
+				89EE21E1292F630900218E17 /* Application */,
+				89EE21DE292F62E200218E17 /* HomeViewController */,
+				89EE21E429309ECF00218E17 /* AddConsumptionViewController */,
+				89EE21E92930A06700218E17 /* Extensions */,
+				89EE21DC292F62D200218E17 /* Storyboards */,
+				89EE21DD292F62DA00218E17 /* Resources */,
 			);
 			path = WalletTrackerApp;
+			sourceTree = "<group>";
+		};
+		89EE21DC292F62D200218E17 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				892E656D292F592F00969BDC /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		89EE21DD292F62DA00218E17 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				892E656B292F592F00969BDC /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		89EE21DE292F62E200218E17 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				892E6566292F592E00969BDC /* HomeViewController.swift */,
+				89EE21DF292F62EF00218E17 /* HomeViewModel.swift */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		89EE21E1292F630900218E17 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				892E6562292F592E00969BDC /* AppDelegate.swift */,
+				892E6564292F592E00969BDC /* SceneDelegate.swift */,
+				892E6570292F592F00969BDC /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		89EE21E429309ECF00218E17 /* AddConsumptionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89EE21E229309EC300218E17 /* AddConsumptionViewController.swift */,
+				89EE21E529309EE200218E17 /* AddConsumptionViewModel.swift */,
+			);
+			path = AddConsumptionViewController;
+			sourceTree = "<group>";
+		};
+		89EE21E92930A06700218E17 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				89EE21E72930A03000218E17 /* Extension + UITextField.swift */,
+				89EE21EC2930AA8D00218E17 /* Extension + UIButton.swift */,
+				89EE21EA2930A18D00218E17 /* Extension + UIStackView.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +190,6 @@
 			files = (
 				892E656F292F592F00969BDC /* LaunchScreen.storyboard in Resources */,
 				892E656C292F592F00969BDC /* Assets.xcassets in Resources */,
-				892E656A292F592E00969BDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +200,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				892E6567292F592E00969BDC /* ViewController.swift in Sources */,
+				892E6567292F592E00969BDC /* HomeViewController.swift in Sources */,
+				89EE21ED2930AA8D00218E17 /* Extension + UIButton.swift in Sources */,
 				892E6563292F592E00969BDC /* AppDelegate.swift in Sources */,
+				89EE21E629309EE200218E17 /* AddConsumptionViewModel.swift in Sources */,
 				892E6565292F592E00969BDC /* SceneDelegate.swift in Sources */,
+				89EE21E329309EC300218E17 /* AddConsumptionViewController.swift in Sources */,
+				89EE21E0292F62EF00218E17 /* HomeViewModel.swift in Sources */,
+				89EE21E82930A03000218E17 /* Extension + UITextField.swift in Sources */,
+				89EE21EB2930A18D00218E17 /* Extension + UIStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		892E6568292F592E00969BDC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				892E6569292F592E00969BDC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		892E656D292F592F00969BDC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,10 +349,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V2AAW35578;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WalletTrackerApp/Info.plist;
+				INFOPLIST_FILE = WalletTrackerApp/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -317,10 +377,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V2AAW35578;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WalletTrackerApp/Info.plist;
+				INFOPLIST_FILE = WalletTrackerApp/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
