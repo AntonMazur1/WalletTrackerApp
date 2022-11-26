@@ -18,6 +18,10 @@
 		89EE21E82930A03000218E17 /* Extension + UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21E72930A03000218E17 /* Extension + UITextField.swift */; };
 		89EE21EB2930A18D00218E17 /* Extension + UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21EA2930A18D00218E17 /* Extension + UIStackView.swift */; };
 		89EE21ED2930AA8D00218E17 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21EC2930AA8D00218E17 /* Extension + UIButton.swift */; };
+		89EE21EF2930DDD900218E17 /* ConsumptionTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21EE2930DDD900218E17 /* ConsumptionTypeModel.swift */; };
+		89EE21F2293244BB00218E17 /* ConsumptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21F1293244BB00218E17 /* ConsumptionTableViewCell.swift */; };
+		89EE21F4293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21F3293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift */; };
+		89EE21F72932458000218E17 /* Extension + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21F62932458000218E17 /* Extension + UILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		89EE21E72930A03000218E17 /* Extension + UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextField.swift"; sourceTree = "<group>"; };
 		89EE21EA2930A18D00218E17 /* Extension + UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIStackView.swift"; sourceTree = "<group>"; };
 		89EE21EC2930AA8D00218E17 /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
+		89EE21EE2930DDD900218E17 /* ConsumptionTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionTypeModel.swift; sourceTree = "<group>"; };
+		89EE21F1293244BB00218E17 /* ConsumptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionTableViewCell.swift; sourceTree = "<group>"; };
+		89EE21F3293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		89EE21F62932458000218E17 /* Extension + UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UILabel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +77,7 @@
 				89EE21E1292F630900218E17 /* Application */,
 				89EE21DE292F62E200218E17 /* HomeViewController */,
 				89EE21E429309ECF00218E17 /* AddConsumptionViewController */,
+				89EE21F02930DDF300218E17 /* Models */,
 				89EE21E92930A06700218E17 /* Extensions */,
 				89EE21DC292F62D200218E17 /* Storyboards */,
 				89EE21DD292F62DA00218E17 /* Resources */,
@@ -97,6 +106,7 @@
 			children = (
 				892E6566292F592E00969BDC /* HomeViewController.swift */,
 				89EE21DF292F62EF00218E17 /* HomeViewModel.swift */,
+				89EE21F5293244EC00218E17 /* Cells */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -124,10 +134,28 @@
 			isa = PBXGroup;
 			children = (
 				89EE21E72930A03000218E17 /* Extension + UITextField.swift */,
+				89EE21F62932458000218E17 /* Extension + UILabel.swift */,
 				89EE21EC2930AA8D00218E17 /* Extension + UIButton.swift */,
 				89EE21EA2930A18D00218E17 /* Extension + UIStackView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		89EE21F02930DDF300218E17 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				89EE21EE2930DDD900218E17 /* ConsumptionTypeModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		89EE21F5293244EC00218E17 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				89EE21F1293244BB00218E17 /* ConsumptionTableViewCell.swift */,
+				89EE21F3293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,10 +230,14 @@
 			files = (
 				892E6567292F592E00969BDC /* HomeViewController.swift in Sources */,
 				89EE21ED2930AA8D00218E17 /* Extension + UIButton.swift in Sources */,
+				89EE21F2293244BB00218E17 /* ConsumptionTableViewCell.swift in Sources */,
 				892E6563292F592E00969BDC /* AppDelegate.swift in Sources */,
 				89EE21E629309EE200218E17 /* AddConsumptionViewModel.swift in Sources */,
 				892E6565292F592E00969BDC /* SceneDelegate.swift in Sources */,
+				89EE21EF2930DDD900218E17 /* ConsumptionTypeModel.swift in Sources */,
 				89EE21E329309EC300218E17 /* AddConsumptionViewController.swift in Sources */,
+				89EE21F72932458000218E17 /* Extension + UILabel.swift in Sources */,
+				89EE21F4293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift in Sources */,
 				89EE21E0292F62EF00218E17 /* HomeViewModel.swift in Sources */,
 				89EE21E82930A03000218E17 /* Extension + UITextField.swift in Sources */,
 				89EE21EB2930A18D00218E17 /* Extension + UIStackView.swift in Sources */,
