@@ -74,7 +74,7 @@ class AddConsumptionViewController: UIViewController {
               !(consumptionName.isEmpty) && !(consumptionType.isEmpty)
         else { return }
         
-        let consumption = viewModel.saveConsumption(with: consumptionName, type: consumptionType, and: Date())
+        guard let consumption = viewModel.saveConsumption(with: consumptionName, type: consumptionType, and: Date()) else { return }
         delegate?.add(consumption: consumption)
         dismiss(animated: true)
     }

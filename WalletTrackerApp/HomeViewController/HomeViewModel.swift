@@ -9,42 +9,58 @@ import Foundation
 
 protocol HomeViewModelProtocol {
     var numberOfSections: Int { get }
+    func getNumberOfSegments() -> [CGFloat]
     func getNumberOfRows(at section: Int) -> Int
-    func save(consumption: ConsumptionTypeModel)
+    func save(consumption: ConsumptionTypeModel, completion: () -> ())
     func getConsumptionCellViewModel(at indexPath: IndexPath) -> ConsumptionTableViewCellViewModelProtocol?
 }
 
 class HomeViewModel: HomeViewModelProtocol {
-    private var consumptions = [
-        [ConsumptionTypeModel(title: "Travelling", type: .travell, createDate: Date()),
-         ConsumptionTypeModel(title: "Products", type: .shopping, createDate: Date())],
-        
-        [ConsumptionTypeModel(title: "new", type: .travell, createDate: Date()),
-         ConsumptionTypeModel(title: "olo", type: .shopping, createDate: Date())]
-    ]
+    private var consumptions: [Date: [ConsumptionTypeModel]] = [:]
     
     var numberOfSections: Int {
-        consumptions.count
+        consumptions.keys.count
     }
     
-    func save(consumption: ConsumptionTypeModel) {
+    func save(consumption: ConsumptionTypeModel, completion: () -> ()) {
+        guard consumptions[consumption.createDate] == nil else {
+            consumptions[consumption.createDate]?.append(consumption)
+            return
+        }
         
+        consumptions[consumption.createDate] = [consumption]
+        completion()
+    }
+    
+    func getNumberOfSegments() -> [CGFloat] {
+        var numberOfSegments: [CGFloat] = []
+        
+        consumptions.keys.forEach {
+            numberOfSegments.append(CGFloat(consumptions[$0]?.count ?? 0))
+        }
+        
+        return numberOfSegments
     }
     
     func getNumberOfRows(at section: Int) -> Int {
-        consumptions[section].count
+        let datesSections = Array(consumptions.keys)
+        guard let numberOfRows = consumptions[datesSections[section]]?.count else { return 0 }
+        
+        return numberOfRows
     }
     
     func getTitleForHeader(at section: Int) -> String {
-        if let firstConsumption = consumptions[section].first {
-            return firstConsumption.createDate.description
-        }
+        let itemsInSections = Array(consumptions.values)
+        guard let createDateHeader = itemsInSections[section].first else { return "" }
         
-        return "No"
+        return createDateHeader.createDate.description
     }
     
     func getConsumptionCellViewModel(at indexPath: IndexPath) -> ConsumptionTableViewCellViewModelProtocol? {
-        let consumption = consumptions[indexPath.section][indexPath.row]
+        let datesSections = Array(consumptions.keys)
+        guard let consumptionSection = consumptions[datesSections[indexPath.section]] else { return nil }
+        let consumption = consumptionSection[indexPath.row]
+        
         return ConsumptionTableViewCellViewModel(consumptionName: consumption.title)
     }
 }
