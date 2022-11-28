@@ -16,19 +16,17 @@ protocol HomeViewModelProtocol {
 }
 
 class HomeViewModel: HomeViewModelProtocol {
-    private var consumptions: [Date: [ConsumptionTypeModel]] = [:]
+    private var consumptions: [String: [ConsumptionTypeModel]] = [:]
     
     var numberOfSections: Int {
         consumptions.keys.count
     }
     
     func save(consumption: ConsumptionTypeModel, completion: () -> ()) {
-        guard consumptions[consumption.createDate] == nil else {
-            consumptions[consumption.createDate]?.append(consumption)
-            return
-        }
+        consumptions[consumption.createDate] == nil
+        ? consumptions[consumption.createDate] = [consumption]
+        : consumptions[consumption.createDate]?.append(consumption)
         
-        consumptions[consumption.createDate] = [consumption]
         completion()
     }
     

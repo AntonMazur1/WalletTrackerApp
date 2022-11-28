@@ -10,5 +10,5 @@ import Foundation
 struct ConsumptionTypeModel {
     let title: String
     let type: ConsumptionType
-    let createDate: Date
+    let createDate: String
 }

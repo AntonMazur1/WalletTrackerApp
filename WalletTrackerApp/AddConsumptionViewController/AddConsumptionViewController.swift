@@ -74,7 +74,13 @@ class AddConsumptionViewController: UIViewController {
               !(consumptionName.isEmpty) && !(consumptionType.isEmpty)
         else { return }
         
-        guard let consumption = viewModel.saveConsumption(with: consumptionName, type: consumptionType, and: Date()) else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        guard let consumption = viewModel.saveConsumption(with: consumptionName,
+                                                          type: consumptionType,
+                                                          and: dateFormatter.string(from: Date())) else { return }
+        
         delegate?.add(consumption: consumption)
         dismiss(animated: true)
     }

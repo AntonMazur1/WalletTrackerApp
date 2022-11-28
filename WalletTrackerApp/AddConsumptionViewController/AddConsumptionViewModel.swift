@@ -17,7 +17,7 @@ enum ConsumptionType: String, CaseIterable {
 protocol AddConsumptionViewModelProtocol {
     var numberOfTypes: Int { get }
     func getTitleForRow(at row: Int) -> String?
-    func saveConsumption(with title: String, type: String, and date: Date) -> ConsumptionTypeModel?
+    func saveConsumption(with title: String, type: String, and date: String) -> ConsumptionTypeModel?
 }
 
 class AddConsumptionViewModel: AddConsumptionViewModelProtocol {
@@ -31,7 +31,7 @@ class AddConsumptionViewModel: AddConsumptionViewModelProtocol {
         typesOfConsumption[row].rawValue
     }
     
-    func saveConsumption(with title: String, type: String, and date: Date) -> ConsumptionTypeModel? {
+    func saveConsumption(with title: String, type: String, and date: String) -> ConsumptionTypeModel? {
         guard let type = ConsumptionType(rawValue: type) else { return nil }
         return ConsumptionTypeModel(title: title, type: type, createDate: date)
     }

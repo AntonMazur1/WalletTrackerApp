@@ -34,6 +34,7 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     func add(consumption: ConsumptionTypeModel) {
         viewModel.save(consumption: consumption) {
             consumptionsTableView.reloadData()
+            drawSegmentedCircle()
         }
     }
     
