@@ -16,16 +16,16 @@ protocol HomeViewModelProtocol {
 }
 
 class HomeViewModel: HomeViewModelProtocol {
-    private var consumptions: [String: [ConsumptionTypeModel]] = [:]
+    private var consumptions: [ConsumptionType: [ConsumptionTypeModel]] = [:]
     
     var numberOfSections: Int {
         consumptions.keys.count
     }
     
     func save(consumption: ConsumptionTypeModel, completion: () -> ()) {
-        consumptions[consumption.createDate] == nil
-        ? consumptions[consumption.createDate] = [consumption]
-        : consumptions[consumption.createDate]?.append(consumption)
+        consumptions[consumption.type] == nil
+        ? consumptions[consumption.type] = [consumption]
+        : consumptions[consumption.type]?.append(consumption)
         
         completion()
     }
@@ -49,9 +49,9 @@ class HomeViewModel: HomeViewModelProtocol {
     
     func getTitleForHeader(at section: Int) -> String {
         let itemsInSections = Array(consumptions.values)
-        guard let createDateHeader = itemsInSections[section].first else { return "" }
+        guard let dateHeader = itemsInSections[section].first else { return "" }
         
-        return createDateHeader.createDate.description
+        return dateHeader.createDate.description
     }
     
     func getConsumptionCellViewModel(at indexPath: IndexPath) -> ConsumptionTableViewCellViewModelProtocol? {
