@@ -8,10 +8,11 @@
 import UIKit
 
 extension UITextField {
-    convenience init(placeholder: String, borderStyle: UITextField.BorderStyle = .none, withBottomLine: Bool = false) {
+    convenience init(placeholder: String, borderStyle: UITextField.BorderStyle = .none, keyboardType: UIKeyboardType = .default, withBottomLine: Bool = false) {
         self.init()
         self.placeholder = placeholder
         self.borderStyle = borderStyle
+        self.keyboardType = keyboardType
         
         if withBottomLine {
             let bottomLine = CALayer()

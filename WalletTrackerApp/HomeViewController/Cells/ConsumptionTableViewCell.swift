@@ -11,10 +11,12 @@ class ConsumptionTableViewCell: UITableViewCell {
     static let identifier = "ConsumptionCell"
     
     private let consumptionNameLabel = UILabel(text: "Name")
+    private let consumptionPriceLabel = UILabel(text: "Price")
     
     var viewModel: ConsumptionTableViewCellViewModelProtocol! {
         didSet {
             consumptionNameLabel.text = viewModel.consumptionName
+            consumptionPriceLabel.text = viewModel.consumptionPrice
         }
     }
     
@@ -29,11 +31,14 @@ class ConsumptionTableViewCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        setupViews(consumptionNameLabel)
+        setupViews(consumptionNameLabel, consumptionPriceLabel)
         
         NSLayoutConstraint.activate([
             consumptionNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            consumptionNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            consumptionNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            consumptionPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            consumptionPriceLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     

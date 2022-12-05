@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ConsumptionTypeModel {
+struct ConsumptionTypeModel: Equatable {
     let title: String
+    let price: String
     let type: ConsumptionType
     let createDate: String
 }
