@@ -8,7 +8,16 @@
 import UIKit
 
 extension UIColor {
-    static func random() -> UIColor {
-        UIColor(red: .random(), green: .random(), blue: .random(), alpha: 1)
+    static func getColor(type: ConsumptionType) -> UIColor {
+        switch type {
+        case .travell:
+            return .red
+        case .shopping:
+            return .yellow
+        case .rent:
+            return .blue
+        case .grocery:
+            return .green
+        }
     }
 }

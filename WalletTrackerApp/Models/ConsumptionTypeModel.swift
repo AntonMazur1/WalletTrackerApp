@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ConsumptionTypeModel: Equatable {
+struct ConsumptionTypeModel: Hashable, Equatable {
     let title: String
     let price: String
     let type: ConsumptionType

@@ -16,35 +16,39 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     
     private let consumptionsTableView = UITableView()
     private let circleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    private let noItemsLabel = UILabel(text: "Добавьте затраты", isHidden: true)
     private let sortButton = UIButton(image: UIImage(systemName: "person.fill"))
-    private let noItemsLabel = UILabel(text: "Нет затрат")
     
-    private var viewModel: HomeViewModel!
+    private var viewModel: HomeViewModelProtocol!
+    private var dataSource: ConsumptionDataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         viewModel = HomeViewModel()
-        drawSegmentedCircle()
         
-        noItemsLabel.isHidden = true
-        
+        setupDataSource()
         setupNavigationBar()
         setupConstraints()
         setupSortButton()
         
+        drawSegmentedCircle()
+        
         consumptionsTableView.round(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20)
-        consumptionsTableView.delegate = self
-        consumptionsTableView.dataSource = self
         consumptionsTableView.register(ConsumptionTableViewCell.self,
                                        forCellReuseIdentifier: ConsumptionTableViewCell.identifier)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dataSource.update()
+        noItemsLabel.isHidden = !dataSource.isEmptyConsumptionList()
+    }
+    
     func add(consumption: ConsumptionTypeModel) {
-        viewModel.save(consumption: consumption) {
-            consumptionsTableView.reloadData()
-            drawSegmentedCircle()
-        }
+        dataSource.saveConsumption(consumption)
+        noItemsLabel.isHidden = !dataSource.isEmptyConsumptionList()
+        drawSegmentedCircle()
     }
     
     private func drawPieRim(_ slices: [(value: CGFloat, color: UIColor)],
@@ -69,19 +73,30 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     }
     
     private func drawSegmentedCircle() {
-        let slices: [(CGFloat, UIColor)] = viewModel.getNumberOfSegments().map { ($0, .random()) }
-        view.backgroundColor = .black
+        let slices = dataSource.getCircleSegments()
         
         UIGraphicsBeginImageContextWithOptions(circleView.frame.size, false, 0)
         drawPieRim(slices, at: circleView.center, radius: 70)
         circleView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
         
+        view.backgroundColor = .black
         view.addSubview(circleView)
     }
     
+    private func setupDataSource() {
+        dataSource = ConsumptionDataSource(tableView: consumptionsTableView) { [weak self] tableView, indexPath, consumption -> UITableViewCell? in
+            let cell = self?.consumptionsTableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.identifier, for: indexPath) as! ConsumptionTableViewCell
+            cell.viewModel = self?.dataSource.getConsumptionCellViewModel(with: consumption)
+            return cell
+        }
+    }
+    
     private func setupNavigationBar() {
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addConsumption))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"),
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(addConsumptionPressed))
         navigationItem.rightBarButtonItem = addButton
     }
     
@@ -89,13 +104,14 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         var configuration = UIButton.Configuration.filled()
         configuration.imagePadding = 5
         configuration.baseBackgroundColor = .clear
+        
         sortButton.configuration = configuration
         sortButton.isUserInteractionEnabled = true
-        sortButton.addTarget(self, action: #selector(sortConsumptionsByPrice), for: .touchUpInside)
+        sortButton.addTarget(self, action: #selector(sortConsumptionsByPricePressed), for: .touchUpInside)
     }
     
     private func setupConstraints() {
-        setupViews(consumptionsTableView, circleView, sortButton, noItemsLabel)
+        setupViews(consumptionsTableView, circleView, noItemsLabel, sortButton)
         
         NSLayoutConstraint.activate([
             consumptionsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -125,74 +141,15 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         }
     }
     
-    @objc func addConsumption() {
+    @objc func addConsumptionPressed() {
         let addConsumptionVC = AddConsumptionViewController()
         addConsumptionVC.delegate = self
         coordinator?.eventOccured(type: .buttonTapped, with: self)
     }
     
-    @objc func sortConsumptionsByPrice() {
-        viewModel.filterConsumptionsByPrice() {
-            consumptionsTableView.reloadData()
-        }
-    }
-}
-
-//MARK: - UITableViewDelegate, UITableViewDataSource
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getNumberOfRows(at: section)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        let numberOfSections = viewModel.numberOfSections
-        
-        if numberOfSections == 0 {
-            noItemsLabel.isHidden = false
-        } else {
-            noItemsLabel.isHidden = true
-        }
-        
-        return numberOfSections
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let headerView = view as? UITableViewHeaderFooterView else { return }
-        
-        var content = headerView.defaultContentConfiguration()
-        content.text = viewModel.getTitleForHeader(at: section)
-        content.textProperties.alignment = .center
-        content.textProperties.color = .black
-        headerView.contentConfiguration = content
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        " "
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = consumptionsTableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.identifier, for: indexPath) as! ConsumptionTableViewCell
-        cell.viewModel = viewModel.getConsumptionCellViewModel(at: indexPath)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        consumptionsTableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            viewModel.deleteConsumption(at: indexPath)
-            
-            consumptionsTableView.numberOfRows(inSection: indexPath.section) > 1
-            ? consumptionsTableView.deleteRows(at: [indexPath], with: .automatic)
-            : consumptionsTableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
-            
-            drawSegmentedCircle()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
+    @objc func sortConsumptionsByPricePressed() {
+//        viewModel.filterConsumptionsByPrice() {
+//            consumptionsTableView.reloadData()
+//        }
     }
 }

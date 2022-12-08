@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89171EA1293F3B95002480CD /* ConsumptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89171EA0293F3B95002480CD /* ConsumptionDataSource.swift */; };
 		892E6563292F592E00969BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6562292F592E00969BDC /* AppDelegate.swift */; };
 		892E6565292F592E00969BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6564292F592E00969BDC /* SceneDelegate.swift */; };
 		892E6567292F592E00969BDC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E6566292F592E00969BDC /* HomeViewController.swift */; };
@@ -26,9 +27,11 @@
 		89EE21F2293244BB00218E17 /* ConsumptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21F1293244BB00218E17 /* ConsumptionTableViewCell.swift */; };
 		89EE21F4293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21F3293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift */; };
 		89EE21F72932458000218E17 /* Extension + UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE21F62932458000218E17 /* Extension + UILabel.swift */; };
+		89F22C8B29420BF100A50D86 /* Extension + Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F22C8A29420BF100A50D86 /* Extension + Dictionary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		89171EA0293F3B95002480CD /* ConsumptionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionDataSource.swift; sourceTree = "<group>"; };
 		892E655F292F592E00969BDC /* WalletTrackerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletTrackerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		892E6562292F592E00969BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		892E6564292F592E00969BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		89EE21F1293244BB00218E17 /* ConsumptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionTableViewCell.swift; sourceTree = "<group>"; };
 		89EE21F3293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		89EE21F62932458000218E17 /* Extension + UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UILabel.swift"; sourceTree = "<group>"; };
+		89F22C8A29420BF100A50D86 /* Extension + Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Dictionary.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		898676FF293B6B7B00DAEC4E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				89171EA0293F3B95002480CD /* ConsumptionDataSource.swift */,
 				897C15CA2938DF1000A1F46F /* Coordinator.swift */,
 			);
 			path = Services;
@@ -150,6 +155,7 @@
 		89EE21E92930A06700218E17 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				89F22C8A29420BF100A50D86 /* Extension + Dictionary.swift */,
 				89EE21E72930A03000218E17 /* Extension + UITextField.swift */,
 				895627BD293775CE0094053E /* Extension + UIView.swift */,
 				89EE21F62932458000218E17 /* Extension + UILabel.swift */,
@@ -248,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89171EA1293F3B95002480CD /* ConsumptionDataSource.swift in Sources */,
 				892E6567292F592E00969BDC /* HomeViewController.swift in Sources */,
 				89EE21ED2930AA8D00218E17 /* Extension + UIButton.swift in Sources */,
 				89EE21F2293244BB00218E17 /* ConsumptionTableViewCell.swift in Sources */,
@@ -261,6 +268,7 @@
 				897C15CB2938DF1000A1F46F /* Coordinator.swift in Sources */,
 				89EE21F4293244CA00218E17 /* ConsumptionTableViewCellViewModel.swift in Sources */,
 				89EE21E0292F62EF00218E17 /* HomeViewModel.swift in Sources */,
+				89F22C8B29420BF100A50D86 /* Extension + Dictionary.swift in Sources */,
 				89EE21E82930A03000218E17 /* Extension + UITextField.swift in Sources */,
 				899F2A352934A23300B10832 /* Extension + CGFloat.swift in Sources */,
 				89EE21EB2930A18D00218E17 /* Extension + UIStackView.swift in Sources */,
