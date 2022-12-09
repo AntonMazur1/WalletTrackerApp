@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     
     private let consumptionsTableView = UITableView()
     private let circleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-    private let noItemsLabel = UILabel(text: "Добавьте затраты", isHidden: true)
+    private let noItemsLabel = UILabel(text: "Добавьте затраты", isHidden: false)
     private let sortButton = UIButton(image: UIImage(systemName: "person.fill"))
     
     private var viewModel: HomeViewModelProtocol!
@@ -34,7 +34,9 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         
         drawSegmentedCircle()
         
-        consumptionsTableView.round(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], cornerRadius: 20)
+        consumptionsTableView.round(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner],
+                                    cornerRadius: 20)
+        consumptionsTableView.delegate = self
         consumptionsTableView.register(ConsumptionTableViewCell.self,
                                        forCellReuseIdentifier: ConsumptionTableViewCell.identifier)
     }
@@ -42,7 +44,6 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dataSource.update()
-        noItemsLabel.isHidden = !dataSource.isEmptyConsumptionList()
     }
     
     func add(consumption: ConsumptionTypeModel) {
@@ -87,7 +88,7 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     private func setupDataSource() {
         dataSource = ConsumptionDataSource(tableView: consumptionsTableView) { [weak self] tableView, indexPath, consumption -> UITableViewCell? in
             let cell = self?.consumptionsTableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.identifier, for: indexPath) as! ConsumptionTableViewCell
-            cell.viewModel = self?.dataSource.getConsumptionCellViewModel(with: consumption)
+            cell.viewModel = self?.viewModel.getConsumptionCellViewModel(with: consumption)
             return cell
         }
     }
@@ -151,5 +152,12 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
 //        viewModel.filterConsumptionsByPrice() {
 //            consumptionsTableView.reloadData()
 //        }
+    }
+}
+
+//MARK: - UITableViewDelegate
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        drawSegmentedCircle()
     }
 }

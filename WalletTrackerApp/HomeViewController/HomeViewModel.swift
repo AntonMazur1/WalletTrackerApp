@@ -8,26 +8,12 @@
 import Foundation
 
 protocol HomeViewModelProtocol {
-    func getColor(with type: ConsumptionType?) -> (red: CGFloat, green: CGFloat, blue: CGFloat)
+    func getConsumptionCellViewModel(with consumption: ConsumptionTypeModel) -> ConsumptionTableViewCellViewModelProtocol?
 }
 
 class HomeViewModel: HomeViewModelProtocol {
-    func getColor(with type: ConsumptionType?) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
-        switch type {
-        case .travell:
-            return (red: 1, green: 0.5, blue: 0)
-        case .shopping:
-            return (red: 1, green: 1, blue: 0)
-        case .rent:
-            return (red: 1, green: 0, blue: 0)
-        case .grocery:
-            return (red: 0, green: 1, blue: 0)
-        case .none:
-            return (red: 1, green: 1, blue: 1)
-        }
+    func getConsumptionCellViewModel(with consumption: ConsumptionTypeModel) -> ConsumptionTableViewCellViewModelProtocol? {
+        ConsumptionTableViewCellViewModel(consumptionName: consumption.title,
+                                          consumptionPrice: consumption.price)
     }
-    
-//    func getNumberOfSegments() -> [CGFloat] {
-//        consumptions.keys.map { (CGFloat(consumptions[$0]?.count ?? 0)) }
-//    }
 }
