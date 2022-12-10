@@ -76,6 +76,14 @@ class ConsumptionDataSource: UITableViewDiffableDataSource<Section, ConsumptionT
         consumptions.removeValue(forKey: key)
     }
     
+    func filterConsumptionsByPrice() {
+        for key in consumptions.keys {
+            consumptions[key] = consumptions[key]?.sorted(by: { Int($0.price) ?? 0 < Int($1.price) ?? 0 })
+        }
+        
+        update()
+    }
+    
     func isEmptyConsumptionList() -> Bool {
         consumptions.isEmpty
     }

@@ -11,13 +11,25 @@ protocol HomeViewControllerDelegate: AnyObject {
     func add(consumption: ConsumptionTypeModel)
 }
 
-class HomeViewController: UIViewController, HomeViewControllerDelegate {
+class HomeViewController: UIViewController {
     weak var coordinator: CoordinatorProtocol?
     
     private let consumptionsTableView = UITableView()
-    private let circleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-    private let noItemsLabel = UILabel(text: "Добавьте затраты", isHidden: false)
-    private let sortButton = UIButton(image: UIImage(systemName: "person.fill"))
+    private let circleView = UIView()
+    private let noItemsLabel = UILabel(text: "Добавьте затраты")
+    
+    lazy private var sortButton: UIButton = {
+        let sortButton = UIButton()
+        sortButton.setImage(UIImage(systemName: "list.number.rtl"), for: .normal)
+        
+        var configuration = UIButton.Configuration.filled()
+        configuration.imagePadding = 5
+        configuration.baseBackgroundColor = .clear
+        
+        sortButton.configuration = configuration
+        sortButton.addTarget(self, action: #selector(sortConsumptionsByPricePressed), for: .touchUpInside)
+        return sortButton
+    }()
     
     private var viewModel: HomeViewModelProtocol!
     private var dataSource: ConsumptionDataSource!
@@ -29,16 +41,10 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         
         setupDataSource()
         setupNavigationBar()
+        setupConsumptionTableView()
         setupConstraints()
-        setupSortButton()
         
-        drawSegmentedCircle()
-        
-        consumptionsTableView.round(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner],
-                                    cornerRadius: 20)
-        consumptionsTableView.delegate = self
-        consumptionsTableView.register(ConsumptionTableViewCell.self,
-                                       forCellReuseIdentifier: ConsumptionTableViewCell.identifier)
+        showSegmentedCircle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,24 +52,18 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         dataSource.update()
     }
     
-    func add(consumption: ConsumptionTypeModel) {
-        dataSource.saveConsumption(consumption)
-        noItemsLabel.isHidden = !dataSource.isEmptyConsumptionList()
-        drawSegmentedCircle()
-    }
-    
     private func drawPieRim(_ slices: [(value: CGFloat, color: UIColor)],
                             at center: CGPoint,
                             radius: CGFloat,
                             thickness: CGFloat = 30) {
-        let totalValues: CGFloat = slices.reduce(0) { $0 + $1.value }
+        let totalValues = slices.reduce(0) { $0 + $1.value }
         var angle = -CGFloat(Double.pi) / 2
         for (value, color) in slices {
             let path = UIBezierPath()
             let sliceAngle = CGFloat(Double.pi) * 2 * value / totalValues
             path.lineWidth = thickness
             color.setStroke()
-            path.addArc(withCenter:center,
+            path.addArc(withCenter: center,
                         radius: radius,
                         startAngle: angle + sliceAngle,
                         endAngle: angle,
@@ -73,16 +73,15 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         }
     }
     
-    private func drawSegmentedCircle() {
+    private func showSegmentedCircle() {
         let slices = dataSource.getCircleSegments()
         
         UIGraphicsBeginImageContextWithOptions(circleView.frame.size, false, 0)
-        drawPieRim(slices, at: circleView.center, radius: 70)
+        drawPieRim(slices, at: CGPoint(x: circleView.bounds.midX, y: circleView.bounds.midY), radius: circleView.bounds.height / 4)
         circleView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
         
         view.backgroundColor = .black
-        view.addSubview(circleView)
     }
     
     private func setupDataSource() {
@@ -101,14 +100,12 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
         navigationItem.rightBarButtonItem = addButton
     }
     
-    private func setupSortButton() {
-        var configuration = UIButton.Configuration.filled()
-        configuration.imagePadding = 5
-        configuration.baseBackgroundColor = .clear
-        
-        sortButton.configuration = configuration
-        sortButton.isUserInteractionEnabled = true
-        sortButton.addTarget(self, action: #selector(sortConsumptionsByPricePressed), for: .touchUpInside)
+    private func setupConsumptionTableView() {
+        consumptionsTableView.round(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner],
+                                    cornerRadius: 20)
+        consumptionsTableView.delegate = self
+        consumptionsTableView.register(ConsumptionTableViewCell.self,
+                                       forCellReuseIdentifier: ConsumptionTableViewCell.identifier)
     }
     
     private func setupConstraints() {
@@ -125,10 +122,10 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
             sortButton.widthAnchor.constraint(equalToConstant: 30),
             sortButton.heightAnchor.constraint(equalToConstant: 30),
             
-            circleView.topAnchor.constraint(equalTo: view.topAnchor),
+            circleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             circleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             circleView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            circleView.bottomAnchor.constraint(equalTo: consumptionsTableView.topAnchor),
+            circleView.bottomAnchor.constraint(equalTo: sortButton.topAnchor),
             
             noItemsLabel.centerXAnchor.constraint(equalTo: consumptionsTableView.centerXAnchor),
             noItemsLabel.centerYAnchor.constraint(equalTo: consumptionsTableView.centerYAnchor)
@@ -149,15 +146,23 @@ class HomeViewController: UIViewController, HomeViewControllerDelegate {
     }
     
     @objc func sortConsumptionsByPricePressed() {
-//        viewModel.filterConsumptionsByPrice() {
-//            consumptionsTableView.reloadData()
-//        }
+        dataSource.filterConsumptionsByPrice()
+    }
+}
+
+//MARK: - HomeViewControllerDelegate
+extension HomeViewController: HomeViewControllerDelegate {
+    func add(consumption: ConsumptionTypeModel) {
+        dataSource.saveConsumption(consumption)
+        noItemsLabel.isHidden = !dataSource.isEmptyConsumptionList()
+        showSegmentedCircle()
     }
 }
 
 //MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        drawSegmentedCircle()
+        showSegmentedCircle()
+        noItemsLabel.isHidden = !dataSource.isEmptyConsumptionList()
     }
 }
